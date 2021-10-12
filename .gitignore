@@ -30,3 +30,7 @@ override.tf.json
 
 # Since this is just exercises
 **/.terraform.lock.hcl
+
+
+# VSCode
+**/.vscode/*
