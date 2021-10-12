@@ -9,7 +9,7 @@ terraform {
 
 provider "aws" {
   profile = "default"
-  region  = "ca-central-1"
+  region  = var.region
 }
 
 resource "aws_security_group" "web" {
@@ -45,24 +45,26 @@ resource "aws_security_group" "web" {
   }
 }
 
+resource "aws_key_pair" "ssh-key" {
+  key_name   = "ssh-key"
+  public_key = var.ssh_public_key
+}
+
 resource "aws_instance" "web_server" {
-  ami             = "ami-0a70476e631caa6d3"
-  instance_type   = "t2.micro"
-  security_groups = ["web"]
-  user_data       = <<-EOF
-                  #!/bin/bash
-                  sudo su
-                  yum -y update
-                  yum -y install httpd
-                  echo "<h1> My web server!! </h1>" >> /var/www/html/index.html
-                  systemctl enable httpd
-                  systemctl start httpd
-                  EOF
+  ami                         = "ami-0a70476e631caa6d3"
+  instance_type               = "t2.micro"
+  security_groups             = ["${aws_security_group.web.name}"]
+  associate_public_ip_address = true
+  key_name                    = "ssh-key"
+  user_data                   = file("bootstrap.sh")
   tags = {
     Name = "terraform web server"
   }
 }
 
-output "DNS" {
-  value = aws_instance.web_server.public_dns
+output "curl" {
+  value = "curl ${aws_instance.web_server.public_dns}"
+}
+output "ssh" {
+  value = "ssh -i ~/.ssh/id_rsa ec2-user@${aws_instance.web_server.public_dns}"
 }
