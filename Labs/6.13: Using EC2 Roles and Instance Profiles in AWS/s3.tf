@@ -10,3 +10,11 @@ resource "aws_s3_bucket_public_access_block" "data" {
   block_public_policy     = true
   restrict_public_buckets = true
 }
+
+resource "aws_s3_bucket_object" "test_file" {
+  bucket       = aws_s3_bucket.data.id
+  key          = "test_file.txt"
+  source       = "test_file.txt"
+  content_type = "text"
+  etag         = filemd5("test_file.txt")
+}

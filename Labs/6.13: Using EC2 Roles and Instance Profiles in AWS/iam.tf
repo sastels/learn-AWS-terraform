@@ -30,10 +30,19 @@ resource "aws_iam_role_policy" "web_policy" {
     Statement = [
       {
         Action = [
-          "s3:*"
+          "s3:ListAllMyBuckets",
+          "s3:GetBucketLocation"
         ],
         Effect   = "Allow",
-        Resource = "*"
+        Resource = ["arn:aws:s3:::*"]
+      },
+      {
+        Action = [
+          "s3:Get*",
+          "s3:List*"
+        ],
+        Effect   = "Allow",
+        Resource = ["${aws_s3_bucket.data.arn}/*", aws_s3_bucket.data.arn]
       }
     ]
   })
