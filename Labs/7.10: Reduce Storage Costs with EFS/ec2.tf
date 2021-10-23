@@ -1,4 +1,5 @@
-resource "aws_instance" "web_1" {
+resource "aws_instance" "web_server" {
+  count                       = 2
   ami                         = "ami-0a70476e631caa6d3"
   instance_type               = "t2.micro"
   security_groups             = [aws_security_group.ec2_efs.name]
@@ -11,13 +12,13 @@ resource "aws_instance" "web_1" {
   }
 
   tags = {
-    Name = "Web server 1"
+    Name = "Web server"
   }
 }
 
 output "curl" {
-  value = "curl ${aws_instance.web_1.public_dns}\n"
+  value = "curl ${aws_instance.web_server[0].public_dns}\ncurl ${aws_instance.web_server[1].public_dns}"
 }
 output "ssh" {
-  value = "ssh -i ~/.ssh/id_rsa ec2-user@${aws_instance.web_1.public_dns}\n"
+  value = "ssh -i ~/.ssh/id_rsa ec2-user@${aws_instance.web_server[0].public_dns}\nssh -i ~/.ssh/id_rsa ec2-user@${aws_instance.web_server[1].public_dns}"
 }

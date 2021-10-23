@@ -1,5 +1,5 @@
 #!/bin/bash
-sleep 1m
+sleep 5m
 sudo su - root
 yum -y update
 yum -y install httpd

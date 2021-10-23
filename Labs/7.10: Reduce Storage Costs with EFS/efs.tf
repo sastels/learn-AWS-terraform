@@ -6,7 +6,7 @@ resource "aws_efs_file_system" "efs" {
 
 resource "aws_efs_mount_target" "efs" {
   file_system_id  = aws_efs_file_system.efs.id
-  subnet_id       = aws_instance.web_1.subnet_id
+  subnet_id       = aws_instance.web_server[0].subnet_id
   security_groups = [aws_security_group.ec2_efs.id]
 }
 
