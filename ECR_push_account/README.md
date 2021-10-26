@@ -1,3 +1,9 @@
+## ECR user
+
+* create two ECR repos
+* create a user account that can be used to push to one of them but not the other
+* store the user access key in Secrets Manager for later extraction
+
 ## Usage
 
 Run
