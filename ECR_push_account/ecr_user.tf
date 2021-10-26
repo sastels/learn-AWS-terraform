@@ -31,9 +31,16 @@ resource "aws_iam_policy" "ecr" {
     "Version" : "2012-10-17",
     "Statement" : [
       {
+        "Sid" : "GetAuthorizationToken",
+        "Effect" : "Allow",
+        "Action" : [
+          "ecr:GetAuthorizationToken"
+        ],
+        "Resource" : "*"
+      },
+      {
         "Sid" : "AllowPushPull",
         "Effect" : "Allow",
-
         "Action" : [
           "ecr:BatchGetImage",
           "ecr:BatchCheckLayerAvailability",

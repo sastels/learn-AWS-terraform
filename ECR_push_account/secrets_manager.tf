@@ -1,5 +1,5 @@
 resource "aws_secretsmanager_secret" "ecr-user-access-key" {
-  name = "ecr-user-access-key-secret"
+  name = "ecr-user-access-key"
   tags = {
     "access-key-id" = aws_iam_access_key.ecr-user.id
   }
