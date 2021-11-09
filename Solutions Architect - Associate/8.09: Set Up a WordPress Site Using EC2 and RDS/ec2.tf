@@ -1,6 +1,6 @@
 resource "aws_instance" "web_server" {
-  ami = "ami-0a70476e631caa6d3" # Amazon linux
-  # ami = "ami-0bb84e7329f4fa1f7" # ubuntu
+  # ami = "ami-0a70476e631caa6d3" # Amazon linux
+  ami                         = "ami-0bb84e7329f4fa1f7" # ubuntu
   instance_type               = "t2.micro"
   security_groups             = [aws_security_group.ec2.name]
   associate_public_ip_address = true
@@ -24,5 +24,5 @@ output "curl" {
   value = "curl ${aws_instance.web_server.public_dns}\n"
 }
 output "ssh" {
-  value = "ssh -i ~/.ssh/id_rsa ec2-user@${aws_instance.web_server.public_dns}\n"
+  value = "ssh -i ~/.ssh/id_rsa ubuntu@${aws_instance.web_server.public_dns}\n"
 }

@@ -1,6 +1,10 @@
 #!/bin/bash
 sudo su - root
 
+apt update
+apt -y upgrade
+
+
 # apt install openssh-server
 
 
