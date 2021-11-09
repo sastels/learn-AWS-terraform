@@ -14,7 +14,7 @@ provider "aws" {
 
 resource "aws_key_pair" "ssh-key" {
   key_name   = "ssh-key"
-  public_key = var.ssh_public_key
+  public_key = file(var.ssh_public_key_file)
 }
 
 resource "aws_default_vpc" "default" {
