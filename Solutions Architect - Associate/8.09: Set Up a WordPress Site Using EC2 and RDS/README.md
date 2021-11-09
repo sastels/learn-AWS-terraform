@@ -17,3 +17,4 @@ terraform apply
 
 ## Links
 
+https://techsparx.com/software-development/terraform/aws/rds/simple-deploy.html

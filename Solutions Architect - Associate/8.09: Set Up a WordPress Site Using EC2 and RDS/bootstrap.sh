@@ -2,6 +2,11 @@
 sudo su - root
 yum -y update
 
+# MySQL
+
+yum -y install mysql
+
+
 # Web server
 
 yum -y install httpd
