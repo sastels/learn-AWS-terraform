@@ -15,6 +15,8 @@ terraform init
 terraform apply
 ```
 
+Then log into `/wordpress` and configure using the rds endpoint output.
+
 ## Links
 
 https://techsparx.com/software-development/terraform/aws/rds/simple-deploy.html

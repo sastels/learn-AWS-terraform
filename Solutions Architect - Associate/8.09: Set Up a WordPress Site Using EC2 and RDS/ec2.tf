@@ -17,7 +17,7 @@ resource "aws_instance" "web_server" {
 }
 
 data "template_file" "bootstrap" {
-  template = templatefile("./bootstrap.sh", { db_host = aws_db_instance.rds.address })
+  template = file("./bootstrap.sh")
 }
 
 output "curl" {
