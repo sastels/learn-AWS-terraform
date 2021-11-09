@@ -1,23 +1,18 @@
 #!/bin/bash
 sudo su - root
 
+# update ubuntu
+
 apt update
 apt -y upgrade
 
+# Apache, php, mysql
 
-# apt install openssh-server
+apt -y install apache2 libapache2-mod-php php-mysql
+echo "<h1> My web server!! </h1>" > /var/www/html/index.html
+
+# Wordpress
+
+curl https://wordpress.org/latest.tar.gz | tar zx -C /var/www/html
 
 
-# yum -y update
-
-# # MySQL
-
-# yum -y install mysql
-
-# # Web server
-
-# echo "<h1> My web server!! </h1>" >> /var/www/html/index.html
-# yum -y install httpd
-# service httpd start
-
-# # Wordpress
