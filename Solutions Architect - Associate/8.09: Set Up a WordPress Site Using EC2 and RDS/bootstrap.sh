@@ -6,14 +6,10 @@ yum -y update
 
 yum -y install mysql
 
-
 # Web server
 
-yum -y install httpd
-
 echo "<h1> My web server!! </h1>" >> /var/www/html/index.html
-curl ifconfig.me >> /var/www/html/index.html
-echo "\n" >> /var/www/html/index.html
+yum -y install httpd
+service httpd start
 
-systemctl enable httpd
-systemctl start httpd
+# Wordpress
