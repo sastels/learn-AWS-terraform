@@ -14,6 +14,8 @@ resource "aws_instance" "web_server" {
   tags = {
     Name = "Web server"
   }
+
+  depends_on = [aws_internet_gateway.gw]
 }
 
 data "template_file" "bootstrap" {
