@@ -1,10 +1,11 @@
 resource "aws_instance" "web_server" {
   ami                         = "ami-0d8ad3ab25e7abc51" # Amazon Linux 2
   instance_type               = "t2.micro"
-  security_groups             = [aws_security_group.ec2.name]
+  vpc_security_group_ids      = [aws_security_group.ec2.id]
   associate_public_ip_address = true
   key_name                    = "ssh-key"
   user_data                   = data.template_file.bootstrap.rendered
+  subnet_id                   = aws_subnet.public.id
 
   root_block_device {
     encrypted = true
