@@ -29,9 +29,7 @@ cat > /var/www/html/index.html <<EOF
 Go to <a href="/wordpress">Wordpress</a>
 EOF
 
-
 # Wordpress
 
-# curl https://wordpress.org/latest.tar.gz | tar zx -C /var/www/html
-
-# chmod -R a+rwX /var/www
+curl https://wordpress.org/latest.tar.gz | tar zx -C /var/www/html
+chmod -R a+rwX /var/www
