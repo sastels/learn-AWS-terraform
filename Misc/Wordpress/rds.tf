@@ -7,13 +7,18 @@ resource "aws_db_instance" "rds" {
   instance_class         = "db.t3.micro"
   name                   = "wordpress"
   username               = "wordpress"
-  password               = "wordpress"
+  password               = random_password.password.result
   parameter_group_name   = "default.mysql5.7"
   skip_final_snapshot    = true
   apply_immediately      = true
   vpc_security_group_ids = [aws_security_group.rds.id]
 }
 
-output "rds" {
-  value = "mysql -u foo -p -h ${aws_db_instance.rds.address}\n"
+output "database_host" {
+  value = "${aws_db_instance.rds.address}\n"
+}
+
+resource "random_password" "password" {
+  length  = 16
+  special = true
 }

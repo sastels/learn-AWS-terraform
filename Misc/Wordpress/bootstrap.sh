@@ -8,7 +8,7 @@ yum update -y
 # install other packages
 
 amazon-linux-extras install -y php7.2
-yum install -y httpd 
+yum install -y httpd mysql
 
 # tweak groups and file ownership
 
