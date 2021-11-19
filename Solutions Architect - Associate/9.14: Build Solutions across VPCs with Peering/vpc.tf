@@ -1,49 +1,75 @@
-resource "aws_vpc" "main" {
-  cidr_block           = "10.0.0.0/16"
+
+# Web_VPC
+
+resource "aws_vpc" "Web_VPC" {
+  cidr_block           = "192.168.0.0/16"
   enable_dns_hostnames = true
   enable_dns_support   = true
 
   tags = {
-    Name = "main"
+    Name = "Web_VPC"
   }
 }
 
-resource "aws_subnet" "public" {
-  vpc_id                  = aws_vpc.main.id
-  cidr_block              = "10.0.1.0/24"
+resource "aws_subnet" "WebPublic" {
+  vpc_id                  = aws_vpc.Web_VPC.id
+  cidr_block              = "192.168.0.0/24"
   map_public_ip_on_launch = true
   availability_zone       = "ca-central-1a"
 
   tags = {
-    Name = "public"
+    Name = "WebPublic"
   }
 }
 
-resource "aws_subnet" "private" {
+# DB_VPC
+
+resource "aws_vpc" "DB_VPC" {
+  cidr_block           = "192.160.0.0/16"
+  enable_dns_hostnames = true
+  enable_dns_support   = true
+
+  tags = {
+    Name = "Web_VPC"
+  }
+}
+resource "aws_subnet" "DBPrivate_a" {
   vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.2.0/24"
+  cidr_block        = "192.160.0.0/24"
+  availability_zone = "ca-central-1a"
+
+  tags = {
+    Name = "DBPrivate_a"
+  }
+}
+
+resource "aws_subnet" "DBPrivate_b" {
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "192.160.0.0/24"
   availability_zone = "ca-central-1b"
 
   tags = {
-    Name = "private"
+    Name = "DBPrivate_b"
   }
 }
 
-resource "aws_subnet" "database" {
-  vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.3.0/24"
-  availability_zone = "ca-central-1d"
-
-  tags = {
-    Name = "database"
-  }
-}
-
-resource "aws_db_subnet_group" "database" {
+resource "aws_db_subnet_group" "DBPrivate" {
   name       = "database"
-  subnet_ids = [aws_subnet.private.id, aws_subnet.database.id]
+  subnet_ids = [aws_subnet.DBPrivate_a.id, aws_subnet.DBPrivate_b.id]
 
   tags = {
-    Name = "database"
+    Name = "DBPrivate"
+  }
+}
+
+# Peering
+
+resource "aws_vpc_peering_connection" "foo" {
+  peer_vpc_id = aws_vpc.Web_VPC.id
+  vpc_id      = aws_vpc.DB_VPC.id
+  auto_accept = true
+
+  tags = {
+    Name = "DBtoWeb"
   }
 }

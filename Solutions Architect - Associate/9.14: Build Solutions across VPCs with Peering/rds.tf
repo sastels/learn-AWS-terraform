@@ -1,6 +1,6 @@
 resource "aws_db_instance" "rds" {
   identifier             = "wordpress"
-  db_subnet_group_name   = aws_db_subnet_group.database.name
+  db_subnet_group_name   = aws_db_subnet_group.DBPrivate.name
   allocated_storage      = 10
   engine                 = "mysql"
   engine_version         = "5.7"

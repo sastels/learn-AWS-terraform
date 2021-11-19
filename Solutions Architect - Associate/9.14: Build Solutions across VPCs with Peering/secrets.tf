@@ -1,5 +1,5 @@
 resource "aws_secretsmanager_secret" "wordpress_password" {
-  name = "wordpress"
+  name = "wordpress_1"
 }
 
 resource "aws_secretsmanager_secret_version" "wordpress_password" {
