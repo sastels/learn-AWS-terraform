@@ -11,7 +11,7 @@ resource "aws_route" "public_internet_gateway" {
   gateway_id             = aws_internet_gateway.WebIG.id
 }
 
-# resource "aws_route_table_association" "public" {
-#   subnet_id      = aws_subnet.public.id
-#   route_table_id = aws_route_table.public.id
-# }
+resource "aws_route_table_association" "public" {
+  subnet_id      = aws_subnet.WebPublic.id
+  route_table_id = aws_route_table.public.id
+}

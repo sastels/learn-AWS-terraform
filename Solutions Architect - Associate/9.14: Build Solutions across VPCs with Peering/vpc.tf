@@ -13,7 +13,7 @@ resource "aws_vpc" "Web_VPC" {
 
 resource "aws_subnet" "WebPublic" {
   vpc_id                  = aws_vpc.Web_VPC.id
-  cidr_block              = "192.168.0.0/24"
+  cidr_block              = "192.168.1.0/24"
   map_public_ip_on_launch = true
   availability_zone       = "ca-central-1a"
 
@@ -34,8 +34,8 @@ resource "aws_vpc" "DB_VPC" {
   }
 }
 resource "aws_subnet" "DBPrivate_a" {
-  vpc_id            = aws_vpc.main.id
-  cidr_block        = "192.160.0.0/24"
+  vpc_id            = aws_vpc.DB_VPC.id
+  cidr_block        = "192.160.1.0/24"
   availability_zone = "ca-central-1a"
 
   tags = {
@@ -44,8 +44,8 @@ resource "aws_subnet" "DBPrivate_a" {
 }
 
 resource "aws_subnet" "DBPrivate_b" {
-  vpc_id            = aws_vpc.main.id
-  cidr_block        = "192.160.0.0/24"
+  vpc_id            = aws_vpc.DB_VPC.id
+  cidr_block        = "192.160.2.0/24"
   availability_zone = "ca-central-1b"
 
   tags = {

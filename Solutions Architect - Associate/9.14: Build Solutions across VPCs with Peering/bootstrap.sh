@@ -1,35 +1,24 @@
 #!/bin/bash
-sudo su - root
-
-# update
-
-yum update -y
-
-# install other packages
-
-amazon-linux-extras install -y php7.2
-yum install -y httpd mysql
-
-# tweak groups and file ownership
-
-usermod -a -G apache ec2-user
-chown -R ec2-user:apache /var/www
-chmod 2775 /var/www && find /var/www -type d -exec sudo chmod 2775 {} \;
-find /var/www -type f -exec sudo chmod 0664 {} \;
-
-# start apache
-
-systemctl start httpd
-systemctl enable httpd
-
-# simple home page
-
-cat > /var/www/html/index.html <<EOF
-<h1> My web server!! </h1>
-Go to <a href="/wordpress">Wordpress</a>
-EOF
-
-# Wordpress
-
-curl https://wordpress.org/latest.tar.gz | tar zx -C /var/www/html
-chmod -R a+rwX /var/www
+sudo apt update -y
+sudo apt install php-curl php-gd php-mbstring php-xml php-xmlrpc php-soap php-intl php-zip perl mysql-server apache2 libapache2-mod-php php-mysql -y
+wget https://github.com/ACloudGuru-Resources/course-aws-certified-solutions-architect-associate/raw/main/lab/5/wordpress.tar.gz
+tar zxvf wordpress.tar.gz
+cd wordpress
+wget https://raw.githubusercontent.com/ACloudGuru-Resources/course-aws-certified-solutions-architect-associate/main/lab/5/000-default.conf
+cp wp-config-sample.php wp-config.php
+perl -pi -e "s/database_name_here/wordpress/g" wp-config.php
+perl -pi -e "s/username_here/wordpress/g" wp-config.php
+perl -pi -e "s/password_here/wordpress/g" wp-config.php
+perl -i -pe'
+  BEGIN {
+    @chars = ("a" .. "z", "A" .. "Z", 0 .. 9);
+    push @chars, split //, "!@#$%^&*()-_ []{}<>~\`+=,.;:/?|";
+    sub salt { join "", map $chars[ rand @chars ], 1 .. 64 }
+  }
+  s/put your unique phrase here/salt()/ge
+' wp-config.php
+mkdir wp-content/uploads
+chmod 775 wp-content/uploads
+mv 000-default.conf /etc/apache2/sites-enabled/
+mv /wordpress /var/www/
+apache2ctl restart
