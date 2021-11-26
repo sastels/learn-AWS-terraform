@@ -17,8 +17,3 @@ resource "aws_db_instance" "rds" {
 output "database_host" {
   value = "${aws_db_instance.rds.address}\n"
 }
-
-resource "random_password" "password" {
-  length  = 16
-  special = true
-}

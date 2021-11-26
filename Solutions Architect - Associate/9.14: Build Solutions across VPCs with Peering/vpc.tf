@@ -30,7 +30,7 @@ resource "aws_vpc" "DB_VPC" {
   enable_dns_support   = true
 
   tags = {
-    Name = "Web_VPC"
+    Name = "DB_VPC"
   }
 }
 resource "aws_subnet" "DBPrivate_a" {
