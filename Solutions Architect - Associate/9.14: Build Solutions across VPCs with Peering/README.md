@@ -14,7 +14,7 @@ terraform apply
 Then log into `/wordpress` and configure using the rds endpoint output and the database password stored in Secrets Manager.
 
 ## Links
-
+https://www.nicksantamaria.net/post/how-to-peer-vpcs-with-terraform/
 https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/hosting-wordpress.html
 
 https://learn.acloud.guru/handson/b9756e9f-5140-4ec7-b9b7-0ffaed561910/course/certified-solutions-architect-associate
