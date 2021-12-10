@@ -39,7 +39,7 @@ resource "aws_route53_record" "api-k8s-weighted" {
   ttl            = "60"
   set_identifier = "loadbalancer"
   weighted_routing_policy {
-    weight = 255
+    weight = 50
   }
 }
 
@@ -47,10 +47,10 @@ resource "aws_route53_record" "api-lambda-weighted" {
   zone_id        = var.zone_id
   name           = "api.staging.notification.cdssandbox.xyz"
   type           = "CNAME"
-  records        = ["api-lambda.staging.notification.cdssandbox.xyz"]
+  records        = [var.api_lambda_app_gateway]
   ttl            = "60"
   set_identifier = "lambda"
   weighted_routing_policy {
-    weight = 0
+    weight = 50
   }
 }

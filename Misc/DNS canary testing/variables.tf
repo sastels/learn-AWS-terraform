@@ -10,5 +10,5 @@ variable "notification_alb" {
 
 variable "api_lambda_app_gateway" {
   type    = string
-  default = "74i43aysii.execute-api.ca-central-1.amazonaws.com"
+  default = "d-4g6bkuj5mk.execute-api.ca-central-1.amazonaws.com"
 }

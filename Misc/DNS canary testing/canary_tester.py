@@ -23,4 +23,4 @@ while (1):
     lambda_percent = values['lambda'] * 100.0 / total
     k8s_percent =  values['k8s'] * 100.0 / total
     print(f"{total:3d} :  lambda: {lambda_percent:.1f} %     k8s: {k8s_percent:.1f} %")
-    time.sleep(0.5)
+    time.sleep(60) # avoid DNS caching
