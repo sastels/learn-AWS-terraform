@@ -21,6 +21,12 @@ resource "aws_instance" "web_server" {
 
 data "template_file" "bootstrap" {
   template = file("./bootstrap.sh")
+  vars = {
+    db_name     = "${aws_db_instance.rds.name}"
+    db_username = "${aws_db_instance.rds.username}"
+    db_password = "${aws_db_instance.rds.password}"
+    db_host     = "${aws_db_instance.rds.address}"
+  }
 }
 
 output "curl" {
