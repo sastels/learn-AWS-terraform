@@ -8,7 +8,12 @@ variable "notification_alb" {
   default = "notification-staging-alb-1878361959.ca-central-1.elb.amazonaws.com"
 }
 
-variable "api_lambda_app_gateway" {
+variable "api_lambda_app_gateway_api" {
   type    = string
-  default = "d-4g6bkuj5mk.execute-api.ca-central-1.amazonaws.com"
+  default = "d-cmqtfgeja3.execute-api.ca-central-1.amazonaws.com" # API Gateway domain name for api.staging.notification.cdssandbox.xyz
+}
+
+variable "api_lambda_app_gateway_api_lambda" {
+  type    = string
+  default = "d-087bebwcdc.execute-api.ca-central-1.amazonaws.com" # API Gateway domain name for api-lambda.staging.notification.cdssandbox.xyz
 }

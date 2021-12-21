@@ -10,6 +10,7 @@
 
 
 # direct k8s / lambda records
+
 resource "aws_route53_record" "api-k8s" {
   zone_id = var.zone_id
   name    = "api-k8s.staging.notification.cdssandbox.xyz"
@@ -18,15 +19,17 @@ resource "aws_route53_record" "api-k8s" {
   ttl     = "60"
 }
 
-# Already in the account
-#
-# resource "aws_route53_record" "api-lambda" {
-#   zone_id = var.zone_id
-#   name    = "api-lambda.staging.notification.cdssandbox.xyz"
-#   type    = "CNAME"
-#   records = [var.api_lambda_app_gateway]
-#   ttl     = "60"
-# }
+resource "aws_route53_record" "api-lambda" {
+  zone_id = var.zone_id
+  name    = "api-lambda.staging.notification.cdssandbox.xyz"
+  type    = "A"
+
+  alias {
+    evaluate_target_health = false
+    name                   = var.api_lambda_app_gateway_api_lambda
+    zone_id                = "Z19DQILCV0OWEC"
+  }
+}
 
 
 # Weighted records
@@ -39,7 +42,7 @@ resource "aws_route53_record" "api-k8s-weighted" {
   ttl            = "60"
   set_identifier = "loadbalancer"
   weighted_routing_policy {
-    weight = 50
+    weight = 25
   }
 }
 
@@ -47,10 +50,10 @@ resource "aws_route53_record" "api-lambda-weighted" {
   zone_id        = var.zone_id
   name           = "api.staging.notification.cdssandbox.xyz"
   type           = "CNAME"
-  records        = [var.api_lambda_app_gateway]
+  records        = [var.api_lambda_app_gateway_api]
   ttl            = "60"
   set_identifier = "lambda"
   weighted_routing_policy {
-    weight = 50
+    weight = 75
   }
 }
