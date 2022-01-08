@@ -1,8 +1,8 @@
 
-resource "aws_internet_gateway" "WebIG" {
-  vpc_id = aws_vpc.Web_VPC.id
+resource "aws_internet_gateway" "web" {
+  vpc_id = aws_vpc.web.id
 
   tags = {
-    Name = "WebIG"
+    Name = "Web internet gateway"
   }
 }

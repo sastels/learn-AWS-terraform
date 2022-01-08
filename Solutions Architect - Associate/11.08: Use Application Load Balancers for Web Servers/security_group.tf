@@ -1,9 +1,9 @@
 # Web server
 
-resource "aws_security_group" "ec2" {
-  name        = "ec2_security_group"
-  description = "EC2 security group"
-  vpc_id      = aws_vpc.Web_VPC.id
+resource "aws_security_group" "web" {
+  name        = "web_security_group"
+  description = "Web security group"
+  vpc_id      = aws_vpc.web.id
 
 
   ingress {
