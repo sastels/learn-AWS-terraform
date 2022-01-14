@@ -15,3 +15,7 @@ Run
 terraform init
 terraform apply
 ```
+
+## References
+
+[CloudWatch Agent on EC2 with Terraform](https://jazz-twk.medium.com/cloudwatch-agent-on-ec2-with-terraform-8cf58e8736de)
