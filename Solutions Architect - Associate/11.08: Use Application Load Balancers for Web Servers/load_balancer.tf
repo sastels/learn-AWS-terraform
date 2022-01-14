@@ -43,23 +43,3 @@ resource "aws_lb_listener" "web" {
     target_group_arn = aws_lb_target_group.web.arn
   }
 }
-
-
-# # Listener Rule
-
-# resource "aws_lb_listener_rule" "static" {
-#   listener_arn = aws_lb_listener.front_end.arn
-#   priority     = 100
-
-#   action {
-#     type             = "forward"
-#     target_group_arn = aws_lb_target_group.tg.arn
-
-#   }
-
-#   condition {
-#     path_pattern {
-#       values = ["/var/www/html/index.html"]
-#     }
-#   }
-# }
