@@ -29,6 +29,10 @@ resource "aws_ssm_parameter" "cw_agent" {
   name        = "/cloudwatch-agent/config"
   type        = "String"
   value       = file("cw_agent_config.json")
+
+  depends_on = [
+    aws_cloudwatch_log_group.access, aws_cloudwatch_log_group.error
+  ]
 }
 
 output "curl" {
