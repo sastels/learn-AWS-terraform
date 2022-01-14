@@ -37,3 +37,7 @@ output "curl" {
 output "ssh" {
   value = "ssh -i ~/.ssh/id_rsa ec2-user@${aws_instance.web_server[0].public_dns}\n"
 }
+
+output "ssm_cloudwatch_config" {
+  value = aws_ssm_parameter.cw_agent.name
+}
