@@ -21,7 +21,6 @@ resource "template_file" "bootstrap" {
   vars = {
     server_id             = "${count.index}"
     ssm_cloudwatch_config = aws_ssm_parameter.cw_agent.name
-
   }
 }
 

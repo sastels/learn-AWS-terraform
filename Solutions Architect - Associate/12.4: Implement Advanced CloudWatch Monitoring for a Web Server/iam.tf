@@ -36,6 +36,30 @@ resource "aws_iam_role_policy" "this" {
   )
 }
 
+resource "aws_iam_role_policy" "logs" {
+  name = "EC2-Logging-policy"
+  role = aws_iam_role.this.id
+  policy = jsonencode(
+    {
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Effect" : "Allow",
+          "Action" : [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents",
+            "logs:DescribeLogStreams"
+          ],
+          "Resource" : [
+            "*"
+          ]
+        }
+      ]
+    }
+  )
+}
+
 resource "aws_iam_role" "this" {
   name = "EC2-Role"
   path = "/"

@@ -7,8 +7,11 @@ yum -y upgrade
 yum -y install httpd
 
 # Configure Cloudwatch agent
-wget https://s3.amazonaws.com/amazoncloudwatch-agent/amazon_linux/amd64/latest/amazon-cloudwatch-agent.rpm
-rpm -U ./amazon-cloudwatch-agent.rpm
+
+sudo yum install amazon-cloudwatch-agent
+
+# wget https://s3.amazonaws.com/amazoncloudwatch-agent/amazon_linux/amd64/latest/amazon-cloudwatch-agent.rpm
+# rpm -U ./amazon-cloudwatch-agent.rpm
 
 # Use cloudwatch config from SSM
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl \
