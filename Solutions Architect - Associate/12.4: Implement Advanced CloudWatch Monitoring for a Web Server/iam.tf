@@ -17,6 +17,25 @@ resource "aws_iam_role_policy_attachment" "this" {
   policy_arn = element(local.role_policy_arns, count.index)
 }
 
+
+# TODO: scope down or get rid of when things work
+resource "aws_iam_role_policy" "all" {
+  name = "EC2-All"
+  role = aws_iam_role.this.id
+  policy = jsonencode(
+    {
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Effect" : "Allow",
+          "Action" : "*",
+          "Resource" : "*"
+        }
+      ]
+    }
+  )
+}
+
 resource "aws_iam_role_policy" "this" {
   name = "EC2-Inline-Policy"
   role = aws_iam_role.this.id

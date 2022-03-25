@@ -40,12 +40,14 @@
                     {
                         "file_path": "/var/log/httpd/error_log",
                         "log_group_name": "apache/error",
-                        "log_stream_name": "[{instance_id}]"
+                        "log_stream_name": "[{instance_id}]",
+                        "timestamp_format": "%d/%b/%Y:%H:%M:%S %z"
                     },
                     {
                         "file_path": "/var/log/httpd/access_log",
                         "log_group_name": "apache/access",
-                        "log_stream_name": "[{instance_id}]"
+                        "log_stream_name": "[{instance_id}]",
+                        "timestamp_format": "%d/%b/%Y:%H:%M:%S %z"
                     }
                 ]
             }

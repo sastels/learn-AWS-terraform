@@ -45,3 +45,11 @@ output "ssh" {
 output "ssm_cloudwatch_config" {
   value = aws_ssm_parameter.cw_agent.name
 }
+
+output "cloudwatch_agent_logs" {
+  value = "cat /opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log\n"
+}
+
+output "access_logs" {
+  value = "cat var/log/httpd/access_log\n"
+}
