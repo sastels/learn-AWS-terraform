@@ -12,7 +12,7 @@ resource "aws_instance" "server" {
   }
 
   tags = {
-    Name = "Web server"
+    Name = "Server"
   }
 
   depends_on = [aws_internet_gateway.gw]
