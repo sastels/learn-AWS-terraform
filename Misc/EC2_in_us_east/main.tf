@@ -7,9 +7,17 @@ terraform {
   }
 }
 
+locals {
+  region = "eu-west-1"
+  ami    = "ami-09e2d756e7d78558d" # Amazon Linux 2
+  # region = "us-east-1"
+  # ami    = "ami-090fa75af13c156b4" # Amazon Linux 2
+}
+
 provider "aws" {
   profile = "default"
-  region  = "us-east-1"
+  region  = local.region
+
 }
 
 resource "aws_key_pair" "ssh-key" {
