@@ -1,5 +1,5 @@
 resource "aws_instance" "server" {
-  ami                         = "ami-090fa75af13c156b4" # Amazon Linux 2
+  ami                         = local.ami
   instance_type               = "t2.micro"
   vpc_security_group_ids      = [aws_security_group.ec2.id]
   associate_public_ip_address = true
