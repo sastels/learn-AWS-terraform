@@ -34,6 +34,8 @@ override.tf.json
 # Since this is just exercises
 **/.terraform.lock.hcl
 
+# Node
+**/node_modules
 
 # VSCode
 **/.vscode/*
