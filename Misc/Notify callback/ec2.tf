@@ -12,7 +12,7 @@ resource "aws_instance" "web_server" {
   }
 
   tags = {
-    Name = "Web server"
+    Name = "Notify callback server"
   }
 
   depends_on = [aws_internet_gateway.gw]
