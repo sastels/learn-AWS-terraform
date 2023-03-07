@@ -1,57 +1,42 @@
 #!/bin/bash
+
+# switch to root
+
 sudo su - root
 
 # update
 
 yum update -y
 
-# Python
+# Python packages
 
-pip3 install flask
+pip3 install wheel
+pip3 install gunicorn flask
 
 # app
 
-cat > ./application.py <<EOF
+mkdir /callback_app
+cd callback_app
+
+cat > application.py <<EOF
 from flask import Flask
 app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+    return 'Hello from Python!'
+
+if __name__ == "__main__":
+      app.run(host='0.0.0.0', port=80)
+EOF
+
+cat > wsgi.py <<EOF
+from application import app
+
+if __name__ == "__main__":
+    app.run(port=80)
 EOF
 
 # run
 
-# flask --app /application.py run --port=80
-
-
-# Apache!!
-
-# install other packages
-
-amazon-linux-extras install -y php7.2
-yum install -y httpd mysql
-
-# tweak groups and file ownership
-
-usermod -a -G apache ec2-user
-chown -R ec2-user:apache /var/www
-chmod 2775 /var/www && find /var/www -type d -exec sudo chmod 2775 {} \;
-find /var/www -type f -exec sudo chmod 0664 {} \;
-
-# start apache
-
-systemctl start httpd
-systemctl enable httpd
-
-# simple home page
-
-cat > /var/www/html/index.html <<EOF
-<h1> My web server!! </h1>
-Go to <a href="/wordpress">Wordpress</a>
-EOF
-
-# # Wordpress
-
-# curl https://wordpress.org/latest.tar.gz | tar zx -C /var/www/html
-# chmod -R a+rwX /var/www
+gunicorn --bind 0.0.0.0:80 wsgi:app
