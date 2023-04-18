@@ -1,10 +1,10 @@
-resource "aws_db_instance" "rds" {
+resource "aws_db_instance" "database" {
   engine                 = "postgres"
   engine_version         = "14"
   instance_class         = "db.t3.micro"
   allocated_storage      = 10
   max_allocated_storage  = 100
-  name                   = "postgresExample"
+  name                   = "test"
   username               = "postgres"
   password               = random_password.password.result
   port                   = 5432
@@ -15,11 +15,30 @@ resource "aws_db_instance" "rds" {
   vpc_security_group_ids = [aws_security_group.rds.id]
 }
 
-output "database_host" {
-  value = "${aws_db_instance.rds.address}\n"
+provider "postgresql" {
+  version          = ">=1.4.0"
+  host             = aws_db_instance.database.address
+  port             = aws_db_instance.database.port
+  username         = aws_db_instance.database.user
+  password         = aws_db_instance.database.password
+  sslmode          = "require"
+  connect_timeout  = 15
+  superuser        = false
+  expected_version = aws_db_instance.database.engine_version
+}
+
+resource "postgresql_role" "user1" {
+  # provider = "postgresql.admindb"
+  name     = "user1"
+  login    = true
+  password = random_password.password.result
 }
 
 resource "random_password" "password" {
   length  = 16
   special = true
+}
+
+output "database_host" {
+  value = "${aws_db_instance.rds.address}\n"
 }
