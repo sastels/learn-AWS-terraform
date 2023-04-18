@@ -16,19 +16,17 @@ resource "aws_db_instance" "database" {
 }
 
 provider "postgresql" {
-  version          = ">=1.4.0"
   host             = aws_db_instance.database.address
   port             = aws_db_instance.database.port
-  username         = aws_db_instance.database.user
+  username         = aws_db_instance.database.username
   password         = aws_db_instance.database.password
   sslmode          = "require"
-  connect_timeout  = 15
+  connect_timeout  = 60
   superuser        = false
   expected_version = aws_db_instance.database.engine_version
 }
 
 resource "postgresql_role" "user1" {
-  # provider = "postgresql.admindb"
   name     = "user1"
   login    = true
   password = random_password.password.result
@@ -40,5 +38,5 @@ resource "random_password" "password" {
 }
 
 output "database_host" {
-  value = "${aws_db_instance.rds.address}\n"
+  value = "${aws_db_instance.database.address}\n"
 }
