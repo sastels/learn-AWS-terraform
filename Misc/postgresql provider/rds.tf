@@ -16,11 +16,11 @@ resource "aws_db_instance" "database" {
 }
 
 provider "postgresql" {
+  scheme           = "awspostgres"
   host             = aws_db_instance.database.address
   port             = aws_db_instance.database.port
   username         = aws_db_instance.database.username
   password         = aws_db_instance.database.password
-  sslmode          = "require"
   connect_timeout  = 60
   superuser        = false
   expected_version = aws_db_instance.database.engine_version
