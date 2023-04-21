@@ -6,7 +6,7 @@ resource "aws_instance" "web_server" {
   key_name                    = "ssh-key"
   user_data                   = data.template_file.bootstrap.rendered
   subnet_id                   = aws_subnet.public.id
-
+  iam_instance_profile        = aws_iam_instance_profile.ec2_profile.name
   root_block_device {
     encrypted = true
   }
