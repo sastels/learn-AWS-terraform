@@ -25,6 +25,3 @@ data "template_file" "bootstrap" {
 output "curl" {
   value = "curl ${aws_instance.web_server.public_dns}\n"
 }
-output "ssh" {
-  value = "ssh -i ~/.ssh/id_rsa ec2-user@${aws_instance.web_server.public_dns}\n"
-}

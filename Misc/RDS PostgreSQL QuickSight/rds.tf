@@ -16,6 +16,17 @@ resource "aws_db_instance" "test" {
 }
 
 
-output "database_host" {
-  value = "${aws_db_instance.test.address}\n"
+output "psql" {
+  value     = <<EOT
+   cd /tmp
+   curl -o dvdrental.zip https://www.postgresqltutorial.com/wp-content/uploads/2019/05/dvdrental.zip
+   unzip dvdrental.zip
+   export DB=\"postgresql://${aws_db_instance.test.username}:${aws_db_instance.test.password}@${aws_db_instance.test.address}\"
+   psql $DB -c \"CREATE DATABASE dvdrental;\"
+   EOT
+  sensitive = true
+}
+
+output "to-see-psql" {
+  value = "terraform output -raw psql\n"
 }

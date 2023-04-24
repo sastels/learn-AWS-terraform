@@ -1,5 +1,5 @@
 resource "aws_secretsmanager_secret" "postgres_password" {
-  name = "wordpress_${random_string.suffix.result}"
+  name = "postgres_${random_string.suffix.result}"
 }
 
 resource "aws_secretsmanager_secret_version" "postgres_password" {

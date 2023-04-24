@@ -5,6 +5,10 @@ sudo su - root
 
 yum update -y
 
+# postgres
+
+amazon-linux-extras install postgresql10
+
 # install other packages
 
 amazon-linux-extras install -y php7.4 # was php7.2
@@ -28,3 +32,8 @@ cat > /var/www/html/index.html <<EOF
 <h1> My web server!! </h1>
 EOF
 
+# download sample database
+
+# cd /tmp
+# curl -o dvdrental.zip  https://www.postgresqltutorial.com/wp-content/uploads/2019/05/dvdrental.zip
+# unzip dvdrental.zip
