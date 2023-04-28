@@ -20,6 +20,9 @@ resource "aws_instance" "web_server" {
 
 data "template_file" "bootstrap" {
   template = file("./bootstrap.sh")
+  vars = {
+    db_uri = "postgresql://${aws_db_instance.test.username}:${aws_db_instance.test.password}@${aws_db_instance.test.address}"
+  }
 }
 
 output "curl" {

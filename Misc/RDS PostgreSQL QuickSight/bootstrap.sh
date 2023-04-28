@@ -1,4 +1,7 @@
 #!/bin/bash
+
+DB="${db_uri}"
+
 sudo su - root
 
 # update
@@ -34,6 +37,8 @@ EOF
 
 # download sample database
 
-# cd /tmp
-# curl -o dvdrental.zip  https://www.postgresqltutorial.com/wp-content/uploads/2019/05/dvdrental.zip
-# unzip dvdrental.zip
+cd /tmp
+curl -o dvdrental.zip https://www.postgresqltutorial.com/wp-content/uploads/2019/05/dvdrental.zip
+unzip dvdrental.zip
+psql $DB -c "CREATE DATABASE dvdrental;"
+pg_restore -d $DB/dvdrental ./dvdrental.tar
