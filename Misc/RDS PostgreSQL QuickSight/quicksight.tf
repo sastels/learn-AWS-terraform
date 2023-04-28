@@ -6,12 +6,16 @@ resource "aws_quicksight_account_subscription" "subscription" {
 }
 
 resource "aws_quicksight_data_source" "default" {
+  depends_on     = [aws_iam_role_policy_attachment.rds-qs-attach]
   data_source_id = "dvdrental"
   name           = "DVD rentals demo dataset"
-  #   permission {
-  #     actions = ["quicksight:DescribeDataSource", "quicksight:DescribeDataSourcePermissions", "quicksight:PassDataSource"]
-  #     principal = 
-  #   }
+
+  credentials {
+    credential_pair {
+      username = aws_db_instance.test.username
+      password = aws_db_instance.test.password
+    }
+  }
   vpc_connection_properties {
     vpc_connection_arn = aws_vpc.main.arn
   }

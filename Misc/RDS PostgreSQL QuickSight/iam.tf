@@ -52,11 +52,26 @@ resource "aws_iam_role" "quicksight" {
   })
 }
 
-data "aws_iam_policy" "quicksight-rds" {
-  arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+resource "aws_iam_policy" "quicksight-rds" {
+  name        = "rds-access"
+  description = "Allow access to RDS"
+  policy = jsonencode({
+
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "rds-db:connect",
+          "rds:Describe*",
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
 }
 
 resource "aws_iam_role_policy_attachment" "rds-qs-attach" {
   role       = aws_iam_role.quicksight.name
-  policy_arn = data.aws_iam_policy.quicksight-rds.arn
+  policy_arn = aws_iam_policy.quicksight-rds.arn
 }
