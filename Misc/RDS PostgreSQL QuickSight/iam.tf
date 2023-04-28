@@ -63,6 +63,7 @@ resource "aws_iam_policy" "quicksight-rds" {
         Action = [
           "rds-db:connect",
           "rds:Describe*",
+          "rds:*"
         ]
         Effect   = "Allow"
         Resource = "*"
