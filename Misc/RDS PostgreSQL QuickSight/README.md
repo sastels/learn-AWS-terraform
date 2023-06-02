@@ -1,6 +1,8 @@
 ## Description
 
-- PostgreSQL database connected to QuickSight
+- PostgreSQL database in RDS with example database loaded.
+- EC2 connected to the database. SessionManager enabled to connect to the EC2
+- Quicksight running and connected to the database
 - in a VPC with public and private subnets
 
 ## Usage
