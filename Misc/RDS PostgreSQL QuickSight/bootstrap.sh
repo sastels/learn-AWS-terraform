@@ -40,5 +40,8 @@ EOF
 cd /tmp
 curl -o dvdrental.zip https://www.postgresqltutorial.com/wp-content/uploads/2019/05/dvdrental.zip
 unzip dvdrental.zip
+touch ./1a_STARTING
 psql $DB -c "CREATE DATABASE dvdrental;"
+touch ./1b_CREATED
 pg_restore -d $DB/dvdrental ./dvdrental.tar
+touch ./1c_RESTORED

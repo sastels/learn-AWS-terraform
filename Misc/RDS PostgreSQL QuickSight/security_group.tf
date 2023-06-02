@@ -49,20 +49,20 @@ resource "aws_security_group" "rds" {
   description = "RDS security group"
   vpc_id      = aws_vpc.main.id
 
-  # ingress {
-  #   description = "PostgreSQL"
-  #   from_port   = 5432
-  #   to_port     = 5432
-  #   protocol    = "tcp"
-  #   cidr_blocks = [aws_subnet.public.cidr_block]
-  # }
+  ingress {
+    description = "PostgreSQL"
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = [aws_subnet.public.cidr_block]
+  }
 
-  # egress {
-  #   from_port   = 0
-  #   to_port     = 0
-  #   protocol    = "-1"
-  #   cidr_blocks = [aws_subnet.public.cidr_block]
-  # }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = [aws_subnet.public.cidr_block]
+  }
 }
 
 
