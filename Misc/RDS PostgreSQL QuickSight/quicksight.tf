@@ -22,7 +22,7 @@ resource "aws_quicksight_data_source" "default" {
   parameters {
     rds {
       database    = "dvdrental"
-      instance_id = aws_db_instance.test.id
+      instance_id = "test"
     }
   }
   type = "POSTGRESQL"

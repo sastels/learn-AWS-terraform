@@ -13,8 +13,12 @@ terraform init
 terraform apply
 ```
 
-<!-- Then go into QuickSight and add a vpc connection.
-- use the quicksight securitygroup -->
+
+To destroy, first run
+```
+aws quicksight update-account-settings --no-termination-protection-enabled --aws-account-id ######### --default-namespace default --region=ca-central-1
+```
+
 
 ## Links
 
