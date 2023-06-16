@@ -27,15 +27,6 @@ resource "aws_security_group" "ec2" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  # SRE says no :/ 
-  # ingress {
-  #   description = "SSH"
-  #   from_port   = 22
-  #   to_port     = 22
-  #   protocol    = "tcp"
-  #   cidr_blocks = ["0.0.0.0/0"]
-  # }
-
   egress {
     from_port   = 0
     to_port     = 0
@@ -54,14 +45,14 @@ resource "aws_security_group" "rds" {
     from_port   = 5432
     to_port     = 5432
     protocol    = "tcp"
-    cidr_blocks = [aws_subnet.public.cidr_block]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = [aws_subnet.public.cidr_block]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
@@ -91,6 +82,6 @@ resource "aws_security_group_rule" "notification-canada-ca-alb-quicksight-ingres
   from_port                = 5432
   to_port                  = 5432
   protocol                 = "tcp"
-  source_security_group_id = aws_security_group.quicksight.id
-  security_group_id        = aws_security_group.rds.id
+  source_security_group_id = aws_security_group.rds.id
+  security_group_id        = aws_security_group.quicksight.id
 }
