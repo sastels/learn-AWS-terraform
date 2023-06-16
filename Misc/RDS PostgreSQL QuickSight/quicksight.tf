@@ -17,7 +17,7 @@ resource "aws_quicksight_data_source" "default" {
     }
   }
   vpc_connection_properties {
-    vpc_connection_arn = aws_vpc.main.arn
+    vpc_connection_arn = aws_quicksight_vpc_connection.example.arn
   }
   parameters {
     rds {
