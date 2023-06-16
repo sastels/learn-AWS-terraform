@@ -25,7 +25,7 @@ To connect to the EC2:
 
 To destroy, run
 ```
-aws quicksight update-account-settings --no-termination-protection-enabled --aws-account-id ######### --default-namespace default --region=ca-central-1
+aws quicksight update-account-settings --no-termination-protection-enabled --aws-account-id $SCRATCH_ID --default-namespace default --region=ca-central-1
 
 terraform destroy
 ```

@@ -5,7 +5,7 @@ resource "aws_db_instance" "test" {
   instance_class         = "db.t3.micro"
   allocated_storage      = 5
   engine                 = "postgres"
-  engine_version         = "14.1"
+  engine_version         = "15.3"
   vpc_security_group_ids = [aws_security_group.rds.id]
   username               = "postgres"
   password               = aws_secretsmanager_secret_version.postgres_password.secret_string
