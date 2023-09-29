@@ -1,5 +1,6 @@
 
 resource "aws_iam_role" "vpc_connection_role" {
+  name = "quicksight-vpc-connection-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [

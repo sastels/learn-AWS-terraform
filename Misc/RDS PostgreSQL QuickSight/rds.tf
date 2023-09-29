@@ -1,7 +1,7 @@
 resource "aws_db_instance" "test" {
   db_subnet_group_name   = aws_db_subnet_group.database.name
-  db_name                = "test"
-  identifier             = "test"
+  db_name                = "testdb"
+  identifier             = "test-id"
   instance_class         = "db.t3.micro"
   allocated_storage      = 5
   engine                 = "postgres"
