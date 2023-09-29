@@ -1,5 +1,5 @@
 # resource "aws_quicksight_data_source" "rds" {
-#   depends_on     = [aws_iam_role_policy_attachment.rds-qs-attach]
+# #   depends_on     = [aws_iam_role_policy_attachment.rds-qs-attach]
 #   data_source_id = "dvdrental"
 #   name           = "DVD rentals demo dataset"
 
