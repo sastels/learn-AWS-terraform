@@ -7,6 +7,8 @@
 
 ## Usage
 
+Create a default VPC through the console.
+
 Run
 ```
 terraform init

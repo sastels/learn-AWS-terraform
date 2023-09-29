@@ -1,10 +1,3 @@
-resource "aws_quicksight_account_subscription" "subscription" {
-  account_name          = "quicksight-test-${random_string.suffix.result}"
-  authentication_method = "IAM_ONLY"
-  edition               = "ENTERPRISE"
-  notification_email    = "stephen.astels@cds-snc.ca"
-}
-
 # resource "aws_quicksight_data_source" "default" {
 #   depends_on     = [aws_iam_role_policy_attachment.rds-qs-attach]
 #   data_source_id = "dvdrental"
